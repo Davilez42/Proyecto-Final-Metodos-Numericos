@@ -53,12 +53,14 @@ def bisseccionMethod(funcion,an=None,bn=None,error=None):
         contains_poitns_an_bn.append((range_init[0],range_init[1]))##se momorizan an y bn
         
         if error!=None and n>0:
+            
             ant =values_Pn[n-1]
+            
             err = round(fabs( (Pn - ant) /Pn),int(fabs(round(log(error,10)))))
+            
             Values_error.append(err)
             if err==error:
                 n+=1
-                print('SALE POR ERROR PROPORCIONADO')
                 break         
         n+=1    
      
