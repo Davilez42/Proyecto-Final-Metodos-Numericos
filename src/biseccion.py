@@ -119,6 +119,7 @@ fx5 = lambda x: (x-4)**3
 fx6 = lambda x: x/5 +1
 fx7 = lambda x:-x*4+1
 fx8 = lambda x:0.5-((x/(1-x))*sqrt(6/2+x))
+
 bisseccionMethod(fx8,an=0.5,bn=0.1,error=10**-4)
 
 

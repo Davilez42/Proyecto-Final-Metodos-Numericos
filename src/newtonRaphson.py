@@ -54,3 +54,5 @@ fx8 =  0.5-(x/(1-x))
 fx9 = -x**2 + 10
 
 function(fx2,5)
+
+#TODO graficar resultados
