@@ -11,7 +11,6 @@ def findInitValues(function):
             if (function(i)<0):
                 an=i
         except:
-            print('DOMIO ERROR EN ',i)
             pass
         try:
             if (function(i)>0):
@@ -43,13 +42,11 @@ def bisseccionMethod(funcion,an=None,bn=None,error=None):
     
     while n<step_estimed+10:           
         Pn = (range_init[0] + range_init[1])/2#se obtiene el PN
-
         if funcion(Pn)<0:
             range_init[0]=Pn
         else:
             range_init[1]=Pn                 
-        values_Pn.append(Pn)
-        
+        values_Pn.append(Pn)    
         contains_poitns_an_bn.append((range_init[0],range_init[1]))##se momorizan an y bn
         
         if error!=None and n>0:
@@ -59,7 +56,7 @@ def bisseccionMethod(funcion,an=None,bn=None,error=None):
             err = round(fabs( (Pn - ant) /Pn),int(fabs(round(log(error,10)))))
             
             Values_error.append(err)
-            if err==error:
+            if err<=error:
                 n+=1
                 break         
         n+=1    
@@ -121,7 +118,7 @@ fx4 = lambda x: sin(x)#obligatorio dar intervalo
 fx5 = lambda x: (x-4)**3
 fx6 = lambda x: x/5 +1
 fx7 = lambda x:-x*4+1
-fx8= lambda x:0.5-((x/(1-x))*sqrt(6/2+x))
+fx8 = lambda x:0.5-((x/(1-x))*sqrt(6/2+x))
 bisseccionMethod(fx8,an=0.5,bn=0.1,error=10**-4)
 
 
