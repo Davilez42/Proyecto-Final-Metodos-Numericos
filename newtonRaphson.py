@@ -35,4 +35,4 @@ fx7 =  -x*4+1
 fx8 =  0.5-(x/(1-x))
 fx9 = -x**2 + 10
 
-function(fx8,5)
+function(fx2,5)
