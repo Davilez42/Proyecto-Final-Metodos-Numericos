@@ -5,7 +5,7 @@ import numpy as np
 
 
 class FixedPoint(GuiRoot):
-    #Metodo de puhnto fijo 
+    #Metodo del punto fijo 
     def __init__(self,function_transf,function_norlm,x1=None,x2=None,error=None):
         super().__init__('Method Fixed Point')
         self.error = error
