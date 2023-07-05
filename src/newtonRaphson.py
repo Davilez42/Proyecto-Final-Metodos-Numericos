@@ -1,22 +1,15 @@
 from sympy import Symbol,lambdify
 from math import fabs
-from tkinter import *
-from tkinter import ttk
-from matplotlib.figure import Figure
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg,NavigationToolbar2Tk 
 import numpy as np
+from Gui import GuiRoot
 
-class NewtonRaphson(Tk):
+class NewtonRaphson(GuiRoot): 
     def __init__(self,function,x0,error=None):
-        super(NewtonRaphson,self).__init__()
-        self.title("Method Newton Raphson")
-        self.geometry("700x850")
-        self.frm =  Frame(self)
-        self.frm.pack()
+        super().__init__("Method Newton Raphson")
         self.error = error
         self.calculate(function,x0,error)
-        self.build_table_values()
-        self.build_function_plt(function)
+        self.build_table_values(["N","Xn","Error"])
+        self.build_function_plt(f1=function,tg=True,x1=-10,x2=10)
     
     def calculate(self,f,x0,error):
         """
@@ -44,13 +37,12 @@ class NewtonRaphson(Tk):
             """
             ant = xns[n] #obtengo el ultimo
             err = fabs((xn1-ant)/xn1)#calculo el error <la funcion fabs es para calcular valor absoluto>
-            errors.append(round(err,6)*100)     
-            print(round(err,6)*100)
-            if round(err,6)*100==0.0:#si el error es igual a 0 se rompé el cliclo, para no gastar recursos           
+            errors.append(round(err,6))     
+            if round(err,6)==0.0:#si el error es igual a 0 se rompé el cliclo, para no gastar recursos           
                 n+=1
                 break 
             
-            if error is not None and err*100<=error*100:#si se cumple el error se rompe el ciclo
+            if error is not None and err<=error:#si se cumple el error se rompe el ciclo
                 n+=1
                 break;
             
@@ -58,51 +50,14 @@ class NewtonRaphson(Tk):
         self.rows = np.array(list(zip(xns,errors)))#comprimo las dos listas de valores 
 
 
-        
-    def build_table_values(self):
-        #etiquetas 
-        self.label_main = Label(self.frm,text='Values Interations')
-        self.label_main.pack()
-        self.table_values =  ttk.Treeview(self.frm,columns=(1,2,3),show="headings")
-        self.table_values.pack()
-        #construyo la tabla de valores 
-        self.table_values.heading(1,text="N")
-        self.table_values.heading(2,text="Xn")
-        self.table_values.heading(3,text="Error")
-        for i,(xn,error) in enumerate(self.rows):
-            self.table_values.insert("",'end',values=[i,xn,error])
-        self.label_summary = Label(self.frm,foreground="#f00",text=f'Aproach root:  {self.rows[-1][0]}  /  Iterations:  {len(self.rows)}  / Error:  {self.error}')
-        self.label_summary.pack()
-    
-    
-    
-    def build_function_plt(self,func):
-        #grafico funcion 
-        f= Figure()
-        a = f.add_subplot(111)
-        a.set_title(f"F(x)={func}")
-        xvals = np.arange(-10,10,0.1)
-        yvals = lambdify(x,func,'numpy')(xvals) 
-        a.plot(xvals,yvals)
-        a.plot(self.rows[-1][0],0,'ro')
-        #configuracion del grid
-        a.axhline(0,color='black')
-        a.axvline(0,color='black')
-        a.minorticks_on()
-        a.grid( True, 'minor', markevery=2, linestyle='--' )
-        a.grid( True, 'major', markevery=10 )
-        canvas =  FigureCanvasTkAgg(f,self.frm)
-        canvas.get_tk_widget().pack()
-        nav = NavigationToolbar2Tk(canvas,self.frm)
-        canvas._tkcanvas.pack()
 
 
-x = Symbol('x')
 """
 Ejemplos:
 en esta parte se utiliza la funcion Symbol() de la libreria numpy la cual se asigna una variable como simbolo
 para posteriormente convertir una expresion de python en forma de symbolos
 """
+x = Symbol('x')
 fx1 =  x**3 + x**2 + 4*x -10
 fx2 =  x/4 +1
 fx3 =  (x-4)**3
