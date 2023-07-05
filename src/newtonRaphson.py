@@ -10,10 +10,11 @@ class NewtonRaphson(GuiRoot):
         self.calculate(function,x0,error)
         self.build_table_values(["N","Xn","Error"])
         self.build_function_plt(f1=function,tg=True,x1=-10,x2=10)
+        self.build_figure()
     
     def calculate(self,f,x0,error):
         """
-        se utiliza la funcion lamdify para obtener una funcion lambda  de una expresion dada en simbolos
+        se utiliza la funcion lambdify para obtener una funcion lambda  de una expresion dada en simbolos
         """
         fx = lambdify(x,f,'numpy') #funcion original   
         fxPrime = lambdify(x, f.diff('x'),'numpy')#funcion derivada 
