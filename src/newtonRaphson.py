@@ -1,8 +1,8 @@
-from sympy import *
+from sympy import Symbol,lambdify
 from math import fabs
 import numpy as np
 
-def function(f,x0,error=None):
+def metodoNewtRaphson(f,x0,error=None):
     """
     se utiliza la funcion lamdify para obtener una funcion lambda  de una expresion dada en simbolos
     """
@@ -31,7 +31,7 @@ def function(f,x0,error=None):
             ant = xns[n] #obtengo el ultimo
             err = fabs((xn1-ant)/xn1)#calculo el error <la funcion fabs es para calcular valor absoluto>
             if err*100<=error*100:#
-                print(err*100,error*100)
+                #print(err*100,error*100)
                 n+=1
                 break;         
         n+=1 #se agrega siempre uno a n ya que n empieza desde 0
@@ -47,12 +47,22 @@ para posteriormente convertir una expresion de python en forma de symbolos
 """
 fx1 =  x**3 + x**2 + 4*x -10
 fx2 =  x/4 +1
-fx5 =  (x-4)**3
-fx6 =  x/5 +1
-fx7 =  -x*4+1
-fx8 =  0.5-(x/(1-x))
-fx9 = -x**2 + 10
+fx3 =  (x-4)**3
+fx4 =  x/5 +1
+fx5 =  -x*4+1
+fx6 =  0.5-(x/(1-x))
+fx7 = -x**2 + 10
+"""
+Funcionamiento:
+para probar el metodo se debe usar la sgt syntaxis:
+- metodoNewtRaphson(funcion,x0,error) <el error es opcional>
+#Ejemplos
+metodoNewtRaphson(fx2,5)
+metodoNewtRaphson(fx1,3,error=10**-4)
+metodoNewtRaphson(fx4,3,error=10**-4)
 
-function(fx2,5)
+"""
+metodoNewtRaphson(fx2,5)
+metodoNewtRaphson(fx3,3,error=10**-4)
 
 #TODO graficar resultados
