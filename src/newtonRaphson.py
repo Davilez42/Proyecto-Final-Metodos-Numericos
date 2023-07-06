@@ -9,6 +9,7 @@ class NewtonRaphson(GuiRoot):
         self.error = error
         self.calculate(function,x0,error)
         self.build_table_values(["N","Xn","Error"])
+        self.build_label_summary()
         self.build_function_plt(f1=function,tg=True,x1=-10,x2=10)
         self.build_figure()
     

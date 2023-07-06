@@ -41,12 +41,15 @@ class GuiRoot(Tk):
             vals.insert(0,i)
             self.table_values.insert("",'end',text=i,values=vals)
 
-        self.label_summary = Label(self.frm,foreground="#f00",text=f'Aproach root:  {self.rows[-1][0]}  /  Iterations:  {len(self.rows)}  / Error:  {self.error}')
+
+    def build_label_summary(self,text=None):
+        tt_ = f'{self.rows[-1][0]}' if text is None else text
+        self.label_summary = Label(self.frm,foreground="#f00",text=f"Root approximation:  {tt_}  Interations:  {len(self.rows)}  Error:  {self.error}")
         self.label_summary.pack()
-           
+               
     def build_function_plt(self,f1=None,f2=None,tg=False,x1=0,x2=0):
         #grafico funcion 
-        f= Figure((15,5))
+        f= Figure((14,4))
         a = f.add_subplot(111)
         a.set_title(f"F(x)={f1}")
         xvals = np.arange(x1,x2,0.1)
@@ -72,7 +75,7 @@ class GuiRoot(Tk):
         ypounts_evaluates =np.vectorize(f)(xpoints)
 
         fig, ax = plt.subplots()
-        fig.set_size_inches(10.1,7.1)
+        fig.set_size_inches(8.1,7.1)
         plt.title("Buis")
         line,=ax.plot(xpoints,ypounts_evaluates)  
         an, = ax.plot( points[0][0],0,'ro' )    

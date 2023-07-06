@@ -11,6 +11,7 @@ class FixedPoint(GuiRoot):
         self.error = error
         self.calculate(function_transf,x1,x2,error)
         self.build_table_values(["N","Xn","Error"])
+        self.build_label_summary()
         #Nota al graficar la azul es la funcion transformada y la zapote es la normal 
         self.build_function_plt(f1=function_transf,f2=function_norlm,tg=False,x1=-2,x2=2)
         self.build_figure()

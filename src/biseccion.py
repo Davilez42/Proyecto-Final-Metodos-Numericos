@@ -1,8 +1,5 @@
 from math import log,fabs,sin,sqrt
-
-
 from Gui import GuiRoot
-
 import numpy as np
 
 class Biseccion(GuiRoot):
@@ -11,10 +8,12 @@ class Biseccion(GuiRoot):
         self.calculate(function,an,bn,error)
         self.error = error
         self.geometry("1100x1050")
-        self.build_table_values(["N","An","Bn","Pn","f(Pn)","Error"])       
+        self.build_table_values(["N","An","Bn","Pn","f(Pn)","Error"])   
+        self.build_label_summary(f'[{self.rows[-1][0]},{self.rows[-1][1]}]')    
         self.build_animation_plt(function,self.contains_poitns_an_bn)
         self.build_figure()
-              
+       
+     
     def findInitValues(self,function):
         an =0
         bn =0    
@@ -96,6 +95,6 @@ fx8 = lambda x:0.5-((x/(1-x))*sqrt(6/2+x))
 
 
 if __name__== "__main__":
-    method = Biseccion(fx2,an=-10,bn=10,error=10**-4)
+    method = Biseccion(fx1,an=-10,bn=10,error=10**-4)
     method.mainloop()
     
