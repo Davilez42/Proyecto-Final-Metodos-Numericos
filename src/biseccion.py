@@ -75,8 +75,8 @@ class Biseccion(GuiRoot):
                     break         
             n+=1    
         
-        self.rows =  list(zip(values_an,values_bn,values_Pn,values_Fpn,Values_error))           
-        self.contains_poitns_an_bn = list(zip(values_an,values_bn))
+        self.rows =  np.array(zip(values_an,values_bn,values_Pn,values_Fpn,Values_error))           
+        self.contains_poitns_an_bn = np.array(zip(values_an,values_bn))
     
     
 
@@ -89,12 +89,11 @@ fx3 = lambda x: log(x,10)#obligatorio dar intervalo
 fx4 = lambda x: sin(x)#obligatorio dar intervalo 
 fx5 = lambda x: (x-4)**3
 fx6 = lambda x: x/5 +1
-fx7 = lambda x:-x*4+1
-fx8 = lambda x:0.5-((x/(1-x))*sqrt(6/2+x))
-
+fx7 = lambda x: -x*4+1
+fx8 = lambda x: 0.5-((x/(1-x))*sqrt(6/2+x))
 
 
 if __name__== "__main__":
-    method = Biseccion(fx1,an=-10,bn=10,error=10**-4)
+    method = Biseccion(fx8,an=1,bn=0,error=10**-4)
     method.mainloop()
     

@@ -51,9 +51,6 @@ class NewtonRaphson(GuiRoot):
             n+=1 #se agrega siempre uno a n ya que n empieza desde 0
         self.rows = np.array(list(zip(xns,errors)))#comprimo las dos listas de valores 
 
-
-
-
 """
 Ejemplos:
 en esta parte se utiliza la funcion Symbol() de la libreria numpy la cual se asigna una variable como simbolo
@@ -77,5 +74,5 @@ para probar el metodo se debe usar la sgt syntaxis:
  method = NewtonRaphson(fx4,3,error=10**-4)
 """
 if __name__ == "__main__":
-    method = NewtonRaphson(fx7,4)
+    method = NewtonRaphson(fx3,0.5,error=10**-4)
     method.mainloop()
