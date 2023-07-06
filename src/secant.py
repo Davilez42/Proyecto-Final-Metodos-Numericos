@@ -5,7 +5,7 @@ from sympy import Symbol,lambdify
 
 
 class Secant(GuiRoot):
-    #Metodo del punto fijo 
+    #Metodo de la secante
     def __init__(self,f,x_1=None,x_2=None,error=None):
         super().__init__('Method Secant')
         self.error = error
