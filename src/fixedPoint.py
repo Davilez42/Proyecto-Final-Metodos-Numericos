@@ -1,7 +1,7 @@
 
 from math import e,fabs
 from Gui import GuiRoot
-import numpy as np
+from sympy import Symbol,lambdify
 
 
 class FixedPoint(GuiRoot):
@@ -13,7 +13,7 @@ class FixedPoint(GuiRoot):
         self.build_table_values(["N","Xn","Error"])
         self.build_label_summary()
         #Nota al graficar la azul es la funcion transformada y la zapote es la normal 
-        self.build_function_plt(f1=function_transf,f2=function_norlm,tg=False,x1=-2,x2=2)
+        self.build_function_plt(f1=function_transf,f2=function_norlm,x1=-2,x2=2)
         self.build_figure()
 
         
@@ -23,12 +23,13 @@ class FixedPoint(GuiRoot):
         valuesXn = [x0]
         valuesError = [None]         
         n=0
+        fx = lambdify(x,f,'numpy')
         while n<steps:
             """
             en cada iteracion se calcula el xn dato con la formula y posteriormente si se a proporcionado
             un error se hace el calculo para saber si cumple con dicho error proporcionado    
             """
-            xn = f(valuesXn[-1])
+            xn = fx(valuesXn[-1])
             
             valuesXn.append(xn)
             err = fabs((xn-valuesXn[-2])/xn)#formula del error, se multiplica por 100 para manejar los errores en porcentajes
@@ -45,12 +46,13 @@ class FixedPoint(GuiRoot):
 
 
 #Ejemplos 
-#funciones ya trasformadas o despejadas  
-fx1 = lambda x:2**x**2 +5*x             
-fx1_trans = lambda x:2**x**2 /-5
+#funciones ya trasformadas o despejadas
+x = Symbol('x')
+fx1 = 2**x**2 +5*x             
+fx1_trans = 2**x**2 /-5
 
-fx2 = lambda x:(e**-x) -x
-fx2_trans = lambda x:e**-x 
+fx2 = (e**-x) -x
+fx2_trans = e**-x 
 
 
 """ Funcionamiento:
@@ -63,6 +65,6 @@ para probar el metodo se debe usar la sgt syntaxis:
 """
 
 if __name__ == "__main__":
-   method  = FixedPoint(fx2_trans,fx2,0,1) 
+   method  = FixedPoint(fx1_trans,fx1,0,1) 
    method.mainloop()
 

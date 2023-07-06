@@ -1,6 +1,5 @@
 from tkinter import *
 from sympy import Symbol,lambdify
-from math import fabs
 from tkinter import ttk
 from matplotlib import pyplot as plt
 import matplotlib.animation as animation
@@ -47,19 +46,20 @@ class GuiRoot(Tk):
         self.label_summary = Label(self.frm,foreground="#f00",text=f"Root approximation:  {tt_}  Interations:  {len(self.rows)}  Error:  {self.error}")
         self.label_summary.pack()
                
-    def build_function_plt(self,f1=None,f2=None,tg=False,x1=0,x2=0):
+    def build_function_plt(self,f1=None,f2=None,x1=0,x2=0):
         #grafico funcion 
         f= Figure((14,4))
         a = f.add_subplot(111)
         a.set_title(f"F(x)={f1}")
         xvals = np.arange(x1,x2,0.1)
-        yvals = lambdify(self.x,f1,'numpy')(xvals) if tg else f1(xvals)
+        yvals = lambdify(self.x,f1,'numpy')(xvals) 
         a.plot(xvals,yvals)
         a.plot(self.rows[-1][0],0,'ro')
         #configuracion del grid
         if f2 is not None:
-            yf2vals = f2(xvals)
+            yf2vals = lambdify(self.x,f2,'numpy')(xvals)
             a.plot(xvals,yf2vals)
+            
         a.axhline(0,color='black')
         a.axvline(0,color='black')
         a.minorticks_on()
@@ -72,16 +72,15 @@ class GuiRoot(Tk):
         x1=points[0][1]
         x0,x1 = (x1,x0) if x0>x1 else (x0,x1)
         xpoints = np.arange(x0,x1,0.1) 
-        ypounts_evaluates =np.vectorize(f)(xpoints)
+        ypounts_evaluates = np.vectorize(lambdify(self.x,f,'numpy'))(xpoints)
 
         fig, ax = plt.subplots()
         fig.set_size_inches(8.1,7.1)
-        plt.title("Buis")
+        plt.title(f"F(x)={f}")
         line,=ax.plot(xpoints,ypounts_evaluates)  
         an, = ax.plot( points[0][0],0,'ro' )    
         lan = ax.annotate('An',(points[0][0],0),color='red')  
-    
-        
+            
         bn, = ax.plot( points[0][1], 0,'bo' )
         lbn = ax.annotate('Bn',(points[0][1],0),color='blue')
         

@@ -1,6 +1,7 @@
-from math import log,fabs,sin,sqrt
+from math import log,fabs
 from Gui import GuiRoot
-import numpy as np
+from sympy import Symbol,lambdify,sin,cos,sqrt,log
+
 
 class Biseccion(GuiRoot):
     def __init__(self,function,an=None,bn=None,error=None):
@@ -12,7 +13,7 @@ class Biseccion(GuiRoot):
         self.build_label_summary(f'[{self.rows[-1][0]},{self.rows[-1][1]}]')    
         self.build_animation_plt(function,self.contains_poitns_an_bn)
         self.build_figure()
-       
+        
      
     def findInitValues(self,function):
         an =0
@@ -32,13 +33,13 @@ class Biseccion(GuiRoot):
         return [an,bn]
         
 
-    def calculate(self,funcion,an,bn,error):
+    def calculate(self,func,an,bn,error):
         range_init = list()
-        
+        fx = lambdify(x,func,'numpy')
         if an!=None and bn!=None:
             range_init = [an,bn]
         else:
-            range_init = self.findInitValues(funcion)
+            range_init = self.findInitValues(fx)
         
         #calculo lso pasos estimados        
         num = fabs(range_init[1]-range_init[0])
@@ -53,7 +54,7 @@ class Biseccion(GuiRoot):
    
         while n<step_estimed+10:           
             Pn = (range_init[0] + range_init[1])/2#se obtiene el PN
-            fPn = funcion(Pn)
+            fPn = fx(Pn)
             if fPn<0:
                 range_init[0]=Pn
             else:
@@ -75,25 +76,25 @@ class Biseccion(GuiRoot):
                     break         
             n+=1    
         
-        self.rows =  np.array(zip(values_an,values_bn,values_Pn,values_Fpn,Values_error))           
-        self.contains_poitns_an_bn = np.array(zip(values_an,values_bn))
+        self.rows =  list(zip(values_an,values_bn,values_Pn,values_Fpn,Values_error))           
+        self.contains_poitns_an_bn = list(zip(values_an,values_bn))
+        
     
     
 
 
     
-
-fx1 = lambda x: x**3 + x**2 + 4*x -10
-fx2 = lambda x: x/4 +1
-fx3 = lambda x: log(x,10)#obligatorio dar intervalo
-fx4 = lambda x: sin(x)#obligatorio dar intervalo 
-fx5 = lambda x: (x-4)**3
-fx6 = lambda x: x/5 +1
-fx7 = lambda x: -x*4+1
-fx8 = lambda x: 0.5-((x/(1-x))*sqrt(6/2+x))
-
+x = Symbol('x')
+fx1 =  x**3 + x**2 + 4*x -10
+fx2 =  x/4 +1
+fx3 =  log(x,10)#obligatorio dar intervalo [1,0.1]
+fx4 =  sin(x)#obligatorio dar intervalo invertido
+fx5 =  (x-4)**3
+fx6 =  x/5 +1
+fx7 =  -x*4+1 #intervalos invertidos [10,-1]
+fx8 =  0.5-((x/(1-x))*sqrt(6/2+x))#intervalos invertidos [1,0.1]
 
 if __name__== "__main__":
-    method = Biseccion(fx8,an=1,bn=0,error=10**-4)
+    method = Biseccion(fx8,an=1,bn=0.1,error=10**-4)
     method.mainloop()
     
