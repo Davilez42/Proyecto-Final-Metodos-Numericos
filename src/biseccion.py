@@ -92,9 +92,9 @@ fx4 =  sin(x)#obligatorio dar intervalo invertido
 fx5 =  (x-4)**3
 fx6 =  x/5 +1
 fx7 =  -x*4+1 #intervalos invertidos [10,-1]
-fx8 =  0.5-((x/(1-x))*sqrt(6/2+x))#intervalos invertidos [1,0.1]
+fx8 =  0.5-((x/(1-x))*sqrt(6/2+x))#intervalos invertidos [0.5,0]
 
 if __name__== "__main__":
-    method = Biseccion(fx8,an=1,bn=0.1,error=10**-4)
+    method = Biseccion(fx8,an=0.5,bn=0,error=10**-4)
     method.mainloop()
     
