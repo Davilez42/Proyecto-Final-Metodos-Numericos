@@ -78,12 +78,12 @@ class Biseccion(GuiRoot):
         
         self.rows =  list(zip(values_an,values_bn,values_Pn,values_Fpn,Values_error))           
         self.contains_poitns_an_bn = list(zip(values_an,values_bn))
-        
-    
-    
-
-
-    
+ 
+ 
+ 
+ 
+ 
+                                            
 x = Symbol('x')
 fx1 =  x**3 + x**2 + 4*x -10
 fx2 =  x/4 +1

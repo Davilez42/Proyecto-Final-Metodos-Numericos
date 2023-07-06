@@ -48,6 +48,7 @@ class GuiRoot(Tk):
                
     def build_function_plt(self,f1=None,f2=None,x1=0,x2=0):
         #grafico funcion 
+        print(x1,x2)
         f= Figure((14,4))
         a = f.add_subplot(111)
         a.set_title(f"F(x)={f1}")
