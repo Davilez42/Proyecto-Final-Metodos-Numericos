@@ -6,6 +6,12 @@ import matplotlib.animation as animation
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg,NavigationToolbar2Tk 
 import numpy as np
+""" 
+Estudiantes
+- Oscar Fernando Rivera Pardo - 2067730 
+- Jeferson Aguiar Dominguez Diaz - 2067607 
+- Jose David Suarez Cardona -2067548 """
+
 
 class GuiRoot(Tk):
     def __init__(self,title):

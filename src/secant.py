@@ -2,6 +2,11 @@
 from math import e,fabs
 from Gui import GuiRoot
 from sympy import Symbol,lambdify
+""" 
+Estudiantes
+- Oscar Fernando Rivera Pardo - 2067730 
+- Jeferson Aguiar Dominguez Diaz - 2067607 
+- Jose David Suarez Cardona -2067548 """
 
 
 class Secant(GuiRoot):

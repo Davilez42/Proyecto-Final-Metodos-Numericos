@@ -2,6 +2,12 @@ from sympy import Symbol,lambdify
 from math import fabs
 import numpy as np
 from Gui import GuiRoot
+""" 
+Estudiantes
+- Oscar Fernando Rivera Pardo - 2067730 
+- Jeferson Aguiar Dominguez Diaz - 2067607 
+- Jose David Suarez Cardona -2067548 """
+
 
 class NewtonRaphson(GuiRoot): 
     def __init__(self,function,x0,error=None):
