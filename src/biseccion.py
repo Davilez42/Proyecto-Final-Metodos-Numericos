@@ -1,6 +1,11 @@
 from math import log,fabs
 from Gui import GuiRoot
 from sympy import Symbol,lambdify,sin,cos,sqrt,log
+""" 
+Estudiantes
+- Oscar Fernando Rivera Pardo - 2067730 
+- Jeferson Aguiar Dominguez Diaz - 2067607 
+- Jose David Suarez Cardona -2067548 """
 
 
 class Biseccion(GuiRoot):
